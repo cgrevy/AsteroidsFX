@@ -12,6 +12,7 @@ public class Entity implements Serializable {
     private double y;
     private double rotation;
     private float radius;
+    private int[] color = new int[]{0, 0, 0};
             
 
     public String getID() {
@@ -45,7 +46,7 @@ public class Entity implements Serializable {
         return y;
     }
 
-    public void setRotation(double rotation) {
+    public void  setRotation(double rotation) {
         this.rotation = rotation;
     }
 
@@ -59,5 +60,14 @@ public class Entity implements Serializable {
         
     public float getRadius() {
         return this.radius;
+    }
+
+    public void setColor(int[] color) {
+        if (color.length != 3) this.color = new int[]{0, 0, 0};
+        this.color = color;
+    }
+
+    public int[] getColor() {
+        return this.color;
     }
 }

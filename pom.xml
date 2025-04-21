@@ -9,6 +9,13 @@
     <module>Common</module>
     <module>Core</module>
     <module>Player</module>
+    <module>Bullet</module>
+    <module>CommonBullet</module>
+    <module>CommonEnemy</module>
+    <module>EnemySpaceship</module>
+    <module>Collision</module>
+    <module>CommonAsteroids</module>
+    <module>Asteroids</module>
   </modules>
   <properties>
     <java>java</java>
