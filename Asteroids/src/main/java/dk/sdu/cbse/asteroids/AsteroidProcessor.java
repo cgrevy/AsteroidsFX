@@ -6,6 +6,8 @@ import dk.sdu.cbse.common.data.GameData;
 import dk.sdu.cbse.common.data.World;
 import dk.sdu.cbse.common.services.IEntityProcessingService;
 
+import static dk.sdu.cbse.asteroids.AsteroidPlugin.createAsteroid;
+
 public class AsteroidProcessor implements IEntityProcessingService {
 
     @Override
@@ -13,6 +15,10 @@ public class AsteroidProcessor implements IEntityProcessingService {
         for (Entity asteroid : world.getEntities(Asteroid.class)) {
             double changeX = Math.cos(Math.toRadians(asteroid.getRotation()));
             double changeY = Math.sin(Math.toRadians(asteroid.getRotation()));
+
+            if (asteroid.getHealth()<1){
+                splitAsteroid(gameData, world, (Asteroid) asteroid);
+            }
 
             asteroid.setX(asteroid.getX() + changeX * 0.5);
             asteroid.setY(asteroid.getY() + changeY * 0.5);
@@ -34,5 +40,29 @@ public class AsteroidProcessor implements IEntityProcessingService {
             }
 
         }
+    }
+
+    public void splitAsteroid(GameData gameData, World world, Asteroid asteroid){
+        float radius = asteroid.getRadius();
+        if (radius > 8){
+            float newRadius = radius/2;
+            Asteroid a1 = (Asteroid) createAsteroid(gameData);
+            Asteroid a2 = (Asteroid) createAsteroid(gameData);
+            a1.setHealth((int) newRadius);
+            a2.setHealth((int) newRadius);
+            a1.setRadius(newRadius);
+            a2.setRadius(newRadius);
+            a1.setPolygonCoordinates(newRadius, -newRadius, -newRadius, -newRadius, -newRadius, newRadius, newRadius, newRadius);
+            a2.setPolygonCoordinates(newRadius, -newRadius, -newRadius, -newRadius, -newRadius, newRadius, newRadius, newRadius);
+            a1.setX(asteroid.getX());
+            a2.setX(asteroid.getX());
+            a1.setY(asteroid.getY());
+            a2.setY(asteroid.getY());
+            a1.setColor(asteroid.getColor());
+            a2.setColor(asteroid.getColor());
+            world.addEntity(a1);
+            world.addEntity(a2);
+        }
+        world.removeEntity(asteroid);
     }
 }

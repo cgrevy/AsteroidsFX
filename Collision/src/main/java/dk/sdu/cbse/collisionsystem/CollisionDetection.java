@@ -16,12 +16,14 @@ public class CollisionDetection implements IPostEntityProcessingService {
     public void process(GameData gameData, World world) {
         for (Entity entity1 : world.getEntities()){
             for (Entity entity2 : world.getEntities()){
-                if (Objects.equals(entity2.getID(), entity1.getID())){
+                if (Objects.equals(entity2.getID(), entity1.getID()) || Objects.equals(entity1.getClass(), entity2.getClass())){
                     continue;
                 }
                 if (this.collides(entity1, entity2)){
-                    world.removeEntity(entity1);
-                    world.removeEntity(entity2);
+                    entity1.setHealth(entity1.getHealth()-1);
+                    entity2.setHealth(entity2.getHealth()-1);
+                    //world.removeEntity(entity1);
+                    //world.removeEntity(entity2);
                 }
             }
         }

@@ -27,6 +27,7 @@ public class EnemyPlugin implements IGamePluginService {
     private Entity createEnemy(GameData gameData) {
         Entity enemy = new Enemy();
         Random rnd = new Random();
+        enemy.setHealth(10);
         enemy.setPolygonCoordinates(-5,-5,10,0,-5,5);
         enemy.setX(gameData.getDisplayHeight()/3);
         enemy.setY(gameData.getDisplayWidth()/3);
