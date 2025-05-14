@@ -9,3 +9,5 @@ target/
 mods-mvn/
 *.jar
 Bullet/target/
+
+*.class
