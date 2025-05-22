@@ -17,9 +17,13 @@ import javafx.scene.shape.Polygon;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
+import java.lang.module.Configuration;
+import java.lang.module.ModuleFinder;
+import java.nio.file.Paths;
 import java.util.Collection;
 import java.util.Map;
 import java.util.ServiceLoader;
+import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
 import static java.util.stream.Collectors.toList;
@@ -74,7 +78,7 @@ public class Main extends Application {
         });
 
         // Lookup all Game Plugins using ServiceLoader
-        for (IGamePluginService iGamePlugin : getPluginServices()) {
+        for (IGamePluginService iGamePlugin : getPlugins()) { //now using the new getPlugins instead
             iGamePlugin.start(gameData, world);
         }
         for (Entity entity : world.getEntities()) {
@@ -134,8 +138,22 @@ public class Main extends Application {
 
     }
 
+
     private Collection<? extends IGamePluginService> getPluginServices() {
         return ServiceLoader.load(IGamePluginService.class).stream().map(ServiceLoader.Provider::get).collect(toList());
+    }
+    //this function uses the module finder to find all the plugins both in the plugins folder and the boot layer
+    private Collection<? extends IGamePluginService> getPlugins(){
+        ModuleFinder moduleFinder = ModuleFinder.of(Paths.get("plugins"));
+        ModuleLayer parent = ModuleLayer.boot();
+
+        Configuration config = parent.configuration().resolve(moduleFinder, ModuleFinder.of(), Set.of("AnotherAsteroids"));
+
+        ModuleLayer layer = parent.defineModulesWithOneLoader(config, ClassLoader.getSystemClassLoader());
+
+        return ServiceLoader.load(layer, IGamePluginService.class).stream()
+                .map(ServiceLoader.Provider::get)
+                .collect(toList());
     }
 
     private Collection<? extends IEntityProcessingService> getEntityProcessingServices() {
