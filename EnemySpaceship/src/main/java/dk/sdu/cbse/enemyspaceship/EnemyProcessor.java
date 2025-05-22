@@ -51,7 +51,7 @@ public class EnemyProcessor implements IEntityProcessingService {
             }
             if (rnd.nextInt(90) > 80){
                 getBulletSPIs().stream().findFirst().ifPresent(
-                        spi -> {world.addEntity(spi.createBullet(enemy, gameData));}
+                        spi -> {world.addEntity(spi.createBullet(enemy));}
                 );
             }
         }

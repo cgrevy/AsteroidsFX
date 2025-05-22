@@ -1,9 +1,7 @@
 package dk.sdu.cbse.collisionsystem;
 
 import dk.sdu.cbse.bulletsystem.BulletControlSystem;
-import dk.sdu.cbse.common.bullet.Bullet;
 import dk.sdu.cbse.common.data.*;
-import dk.sdu.cbse.common.services.*;
 import org.junit.jupiter.api.*;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -32,7 +30,7 @@ class CollisionDetectionTest {
     public void testCollisionRemovesBullet() {
         BulletControlSystem bulletControlSystem = new BulletControlSystem();
         Entity shooter = new Entity();
-        Entity bullet = bulletControlSystem.createBullet(shooter, gameData);
+        Entity bullet = bulletControlSystem.createBullet(shooter);
         Entity entity = new Entity();
         entity.setHealth(10);
         bullet.setX(0);
@@ -53,7 +51,7 @@ class CollisionDetectionTest {
     public void testCollisionDecreasesHealth(){
         BulletControlSystem bulletControlSystem = new BulletControlSystem();
         Entity shooter = new Entity();
-        Entity bullet = bulletControlSystem.createBullet(shooter, gameData);
+        Entity bullet = bulletControlSystem.createBullet(shooter);
         Entity entity = new Entity();
         entity.setHealth(10);
         assertEquals(10, entity.getHealth());
