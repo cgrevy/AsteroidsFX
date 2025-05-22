@@ -16,6 +16,7 @@
     <module>Collision</module>
     <module>CommonAsteroids</module>
     <module>Asteroids</module>
+    <module>AnotherAsteroids</module>
   </modules>
   <properties>
     <java>java</java>
@@ -53,6 +54,7 @@
         <version>3.10.1</version>
         <configuration>
           <fork>true</fork>
+
         </configuration>
       </plugin>
       <!-- execute the resulting project -->
