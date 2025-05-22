@@ -7,11 +7,11 @@ public interface IEntityProcessingService {
 
     /**
      *
-     *
-     *
-     * @param gameData
-     * @param world
-     * @throws
+     *Called when the state of the entity needs to be processed
+     *Preconditions: Graphics must be rendered
+     * Postconditions: Entity must have been processed such that all its data is updated
+     * @param gameData stores information about the game (screen size and input keys)
+     * @param world stores all the entities in the game
      */
     void process(GameData gameData, World world);
 }
