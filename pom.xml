@@ -16,6 +16,8 @@
     <module>Collision</module>
     <module>CommonAsteroids</module>
     <module>Asteroids</module>
+    <module>CommonScoring</module>
+    <module>ScoringAPI</module>
   </modules>
   <properties>
     <java>java</java>

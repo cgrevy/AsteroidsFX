@@ -4,9 +4,14 @@ import dk.sdu.cbse.common.asteroids.Asteroid;
 import dk.sdu.cbse.common.data.Entity;
 import dk.sdu.cbse.common.data.GameData;
 import dk.sdu.cbse.common.data.World;
+import dk.sdu.cbse.common.scoring.IScoringSPI;
 import dk.sdu.cbse.common.services.IEntityProcessingService;
 
+import java.util.Collection;
+import java.util.ServiceLoader;
+
 import static dk.sdu.cbse.asteroids.AsteroidPlugin.createAsteroid;
+import static java.util.stream.Collectors.toList;
 
 public class AsteroidProcessor implements IEntityProcessingService {
 
@@ -43,7 +48,7 @@ public class AsteroidProcessor implements IEntityProcessingService {
     }
 
     public void splitAsteroid(GameData gameData, World world, Asteroid asteroid){
-        gameData.incrementScore();
+        getScoringSPI().stream().findFirst().ifPresent(iScoringSPI -> gameData.setScore(iScoringSPI.updateScore(1)));
         float radius = asteroid.getRadius();
         if (radius > 8){
             float newRadius = radius/2;
@@ -66,4 +71,9 @@ public class AsteroidProcessor implements IEntityProcessingService {
         }
         world.removeEntity(asteroid);
     }
+
+    private Collection<? extends IScoringSPI> getScoringSPI() {
+        return ServiceLoader.load(IScoringSPI.class).stream().map(ServiceLoader.Provider::get).collect(toList());
+    }
 }
+

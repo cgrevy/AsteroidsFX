@@ -14,12 +14,9 @@ public class ScoringSystemApplication {
     public static void main(String[] args) {
         SpringApplication.run(ScoringSystemApplication.class, args);
     }
-    @GetMapping("/hello")
-    public String hello(@RequestParam(value = "name", defaultValue = "World") String name) {
-        return String.format("Hello %s!", name);
-    }
+
     @GetMapping("/score")
-    public Long calculateHealth(@RequestParam(value = "point") Long point) {
+    public Long updateScore(@RequestParam(value = "point") Long point) {
         totalScore += point;
         return totalScore ;
     }
