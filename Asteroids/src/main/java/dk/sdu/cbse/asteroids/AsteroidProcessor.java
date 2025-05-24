@@ -43,6 +43,7 @@ public class AsteroidProcessor implements IEntityProcessingService {
     }
 
     public void splitAsteroid(GameData gameData, World world, Asteroid asteroid){
+        gameData.incrementScore();
         float radius = asteroid.getRadius();
         if (radius > 8){
             float newRadius = radius/2;
