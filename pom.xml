@@ -16,6 +16,7 @@
     <module>Collision</module>
     <module>CommonAsteroids</module>
     <module>Asteroids</module>
+      <module>CommonPlayer</module>
   </modules>
   <properties>
     <java>java</java>
