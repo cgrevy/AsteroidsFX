@@ -7,6 +7,6 @@ module Bullet {
     requires Common;
     requires CommonBullet;
     provides IGamePluginService with dk.sdu.cbse.bulletsystem.BulletPlugin;
-    provides BulletSPI with dk.sdu.cbse.bulletsystem.BulletControlSystem;
+    provides BulletSPI with dk.sdu.cbse.bulletsystem.BulletPlugin;
     provides IEntityProcessingService with dk.sdu.cbse.bulletsystem.BulletControlSystem;
 }
