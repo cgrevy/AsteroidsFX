@@ -48,8 +48,6 @@ public class AsteroidProcessor implements IEntityProcessingService {
             float newRadius = radius/2;
             Asteroid a1 = (Asteroid) createAsteroid(gameData);
             Asteroid a2 = (Asteroid) createAsteroid(gameData);
-            a1.setHealth((int) newRadius);
-            a2.setHealth((int) newRadius);
             a1.setRadius(newRadius);
             a2.setRadius(newRadius);
             a1.setPolygonCoordinates(newRadius, -newRadius, -newRadius, -newRadius, -newRadius, newRadius, newRadius, newRadius);
